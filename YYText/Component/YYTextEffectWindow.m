@@ -36,7 +36,16 @@
             one.frame = (CGRect){.size = YYTextScreenSize()};
             one.userInteractionEnabled = NO;
             one.windowLevel = UIWindowLevelStatusBar + 1;
+#ifdef __IPHONE_13_0
+            //此处处理 iOS 13版本出现的问题
+           if (@available(iOS 13.0, *)) {
+               one.hidden = YES;
+           } else {
+               one.hidden = NO;
+           }
+#else
             one.hidden = NO;
+#endif
             
             // for iOS 9:
             one.opaque = NO;
